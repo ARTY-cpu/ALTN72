@@ -27,22 +27,23 @@ public class ProgrammeurControleur {
     }
 
     @GetMapping("/unProgrammeur/{idProgrammeur}")
-    public Optional<Programmeur> afficherUnProgrammeur(@PathVariable Integer idProgrammeur){
-        return programmeurService.getunProgrammeur(idProgrammeur);
+    public Optional<Programmeur> afficherUnProgrammeur(@PathVariable("idProgrammeur") Integer idProg) {
+        return programmeurService.getUnProgrammeur(idProg);
     }
 
-    @DeleteMapping("/suppression/{idProgrammeur}")
-    public String suppression(@PathVariable Integer idProgrammeur){
-        return programmeurService.deleteProgrammeur(idProgrammeur);
+    @DeleteMapping("/supprimerProgrammeur/{idProgrammeur}")
+//    @GetMapping("/supprimerProgrammeur/{idProgrammeur}")    @GetMapping fonctionne aussi :-)
+    public void deleteProgrammeur(@PathVariable("idProgrammeur") Integer idProg) {
+        programmeurService.supprimerProgrammeur(idProg);
     }
 
-    @PostMapping("/ajout/")
-    public Programmeur ajouter(@RequestBody Programmeur programmeur){
-        return  programmeurService.saveProgrammeur(programmeur);
+    @PostMapping("/ajouterProgrammeur")
+    public void creerProgrammeur(@RequestBody Programmeur programmeur){
+        programmeurService.ajouterProgrammeur(programmeur);
     }
 
-    @PutMapping("/modification/{idProgrammeur}")
-    public Programmeur modifier(@PathVariable Integer idProgrammeur, @RequestBody Programmeur programmeur){
-        return programmeurService.updateProgrammeur(idProgrammeur, programmeur);
+    @PutMapping("modifier/{idProgrammeur}")
+    public void modifierProgrammeur(@PathVariable Integer idProgrammeur,@RequestBody Programmeur programmeurModified ){
+        programmeurService.modifierProgrammeur(idProgrammeur,programmeurModified);
     }
 }
